@@ -27,4 +27,29 @@ class PostListViewTests(APITestCase):
         response = self.client.get('/posts/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-    
+    # def test_logged_in_user_can_create_post(self):
+    #     post_data = {
+    #         'make': 'Mazda',
+    #         'model': 's-55',
+    #         'year': 2000,
+    #         'description': 'I really enjoyed it',
+    #     }
+    #     with open('pictures/screenshots/Screenshot 2023-03-24 094505.png', 'rb') as image_file:
+    #       post_data['image'] = image_file
+
+    #     self.client.login(username='ada', password='pass')
+    #     response = self.client.post('/posts/', post_data)
+    #     print(response.status_code)
+    #     print(response.content)
+    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    #     count = Post.objects.count()
+    #     self.assertEqual(count, 1)
+        
+
+
+
+
+
+
+
+

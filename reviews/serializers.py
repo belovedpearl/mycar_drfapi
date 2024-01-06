@@ -32,3 +32,12 @@ class ReviewSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'post', 'created_at', 'updated_at', 'content', 'value'
         ]
+
+
+class ReviewDetailSerializer(ReviewSerializer):
+    """
+    Serializer for the Review model used to access the detail view
+    Post is read only field so that it is not set on each update
+    """
+
+    post = serializers.ReadOnlyField(source="post.id")

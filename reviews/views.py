@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from reviews.models import Review
-from .serializers import ReviewSerializer
+from .serializers import ReviewSerializer, ReviewDetailSerializer
+from mycar_drfapi.permissions import IsOwnerOrReadOnly
 
 
 
@@ -14,3 +15,12 @@ class ReviewList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieves a review, allows update or delete if you own it.
+    """
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = ReviewDetailSerializer
+    queryset = Review.objects.all()

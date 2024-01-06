@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from rest_framework import serializers
-from upvotes.model import Upvote
+from upvotes.models import Upvote
 
 
 class UpvoteSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class UpvoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Upvote
-        fields = ['id', 'created_at', 'owner', 'car']
+        fields = ['id', 'created_at', 'owner', 'post']
 
     def create(self, validated_data):
        

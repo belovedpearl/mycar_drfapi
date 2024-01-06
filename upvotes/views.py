@@ -1,6 +1,6 @@
 from rest_framework import generics
-from upvotes.model import Upvote
-from upvote.serializers import UpvoteSerializer
+from upvotes.models import Upvote
+from upvotes.serializers import UpvoteSerializer
 
 
 class UpvoteListView(generics.ListCreateAPIView):

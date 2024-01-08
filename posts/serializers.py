@@ -9,13 +9,14 @@ class PostSerializer(serializers.ModelSerializer):
     Serializer used for the model Post.
     Includes fields for the post information such as owner, owner's profile details,
     and a method field to check if the user is the post owner.
-    Ensures image is of the required dimension
+    Ensures image is included in the post and of the required dimension
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source = 'owner.profile.id')
     location = serializers.ReadOnlyField(source = 'owner.profile.location')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    image = serializers.ImageField(required=True)
     upvote_id = serializers.SerializerMethodField()
     downvote_id = serializers.SerializerMethodField()
     upvotes_count = serializers.ReadOnlyField()

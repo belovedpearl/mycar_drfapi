@@ -28,8 +28,7 @@ class UpvoteModelTest(TestCase):
         self.assertEqual(str(upvote), resulting_str)
 
     def test_unique_together_constraint(self):
-        Upvote.objects.create(owner=self.user, post=self.post)
-        
-        # Attempt to create another downvote with the same owner and post
+        Upvote.objects.create(owner=self.user, post=self.post)    
+        # Try creating another upvote with the same owner and post
         with self.assertRaises(Exception):
             Upvote.objects.create(owner = self.user, post = self.post)

@@ -12,7 +12,6 @@ class ProfileList(generics.ListAPIView):
     No create view as profile creation is handled by signals
     Orders profile list by creation in descending order
     """
-    # queryset = Profile.objects.all().order_by('-created_at')
     queryset = Profile.objects.annotate(
         posts_count = Count('owner__post', distinct=True),
         followers_count = Count('owner__followed', distinct=True),
@@ -21,6 +20,16 @@ class ProfileList(generics.ListAPIView):
         downvotes_count = Count('owner__downvote', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = [
+        'posts_count',
+        'followers_count',
+        'following_count',
+        'upvotes_count',
+        'downvotes_count',
+        'owner__following__created_at',
+        'owner__followed__created_at',
+    ]
 
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
@@ -30,4 +39,10 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        posts_count = Count('owner__post', distinct=True),
+        followers_count = Count('owner__followed', distinct=True),
+        following_count = Count('owner__following', distinct=True),
+        upvotes_count = Count('owner__upvote', distinct=True),
+        downvotes_count = Count('owner__downvote', distinct=True),
+    ).order_by('-created_at')

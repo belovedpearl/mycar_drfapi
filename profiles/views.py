@@ -3,6 +3,7 @@ from profiles.models import Profile
 from profiles.serializers import ProfileSerializer
 from mycar_drfapi.permissions import IsOwnerOrReadOnly
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProfileList(generics.ListAPIView):
@@ -20,7 +21,10 @@ class ProfileList(generics.ListAPIView):
         downvotes_count = Count('owner__downvote', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+        ]
     ordering_fields = [
         'posts_count',
         'followers_count',
@@ -31,6 +35,10 @@ class ProfileList(generics.ListAPIView):
         'owner__followed__created_at',
     ]
 
+    filterset_fields = [
+        "owner__following__followed__profile",
+        "owner__followed__owner__profile",     
+    ]
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """

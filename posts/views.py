@@ -21,6 +21,14 @@ class PostsList(generics.ListCreateAPIView):
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        '^make',
+        '^model',
+        'owner__username',
+        '^body_types',
+        '^year'
     ]
     ordering_fields = [
         'upvotes_count',

@@ -3,6 +3,7 @@ from mycar_drfapi.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class PostsList(generics.ListCreateAPIView):
@@ -22,6 +23,7 @@ class PostsList(generics.ListCreateAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     search_fields = [
         '^make',
@@ -29,6 +31,17 @@ class PostsList(generics.ListCreateAPIView):
         'owner__username',
         '^body_types',
         '^year'
+    ]
+    filterset_fields = [
+        #user's feed
+        'owner__followed__owner__profile',
+        #user's upvoted post
+        'upvotes__owner__profile',
+        #user's downvoted post
+        'downvotes__owner__profile',
+        #posts
+        'owner__profile',
+        'body_types'     
     ]
     ordering_fields = [
         'upvotes_count',

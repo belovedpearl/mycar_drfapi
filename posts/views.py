@@ -19,6 +19,15 @@ class PostsList(generics.ListCreateAPIView):
         downvotes_count= Count('downvotes', distinct=True),
         reviews_count= Count('review', distinct=True)
     ).order_by('-created_at')
+    filter_backends = [
+        filters.OrderingFilter,
+    ]
+    ordering_fields = [
+        'upvotes_count',
+        'downvotes_count',
+        'upvotes__created_at',
+        'downvotes__created_at',
+    ]
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -30,4 +39,8 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Post.objects.all().order_by('-created_at')
+    queryset = Post.objects.annotate(
+        upvotes_count= Count('upvotes', distinct=True),
+        downvotes_count= Count('downvotes', distinct=True),
+        reviews_count= Count('review', distinct=True)
+    ).order_by('-created_at')

@@ -10,7 +10,6 @@ class Review(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    value = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     content = models.TextField()
 
     class Meta:

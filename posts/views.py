@@ -26,11 +26,11 @@ class PostsList(generics.ListCreateAPIView):
         DjangoFilterBackend,
     ]
     search_fields = [
-        '^make',
+        'make',
         '^model',
         'owner__username',
         '^body_types',
-        '^year'
+        'year'
     ]
     filterset_fields = [
         #user's feed

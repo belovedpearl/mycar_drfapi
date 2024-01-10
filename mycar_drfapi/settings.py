@@ -60,10 +60,12 @@ REST_AUTH_SERIALIZERS = {
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--5sxc@dpc%nq+opkfc$n&r$_ltsh2)s!b#-w(!$)(7n92ahfa1'
+#SECRET_KEY = 'django-insecure--5sxc@dpc%nq+opkfc$n&r$_ltsh2)s!b#-w(!$)(7n92ahfa1'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     '8000-belovedpear-mycardrfapi-pzdbdqxv52n.ws-eu107.gitpod.io',
@@ -123,6 +125,10 @@ else:
          r"^https://.*\.gitpod\.io$",
      ]
 CORS_ALLOW_CREDENTIALS = True
+
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 
 ROOT_URLCONF = 'mycar_drfapi.urls'
 

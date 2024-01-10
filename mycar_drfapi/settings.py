@@ -70,7 +70,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     '8000-belovedpear-mycardrfapi-pzdbdqxv52n.ws-eu107.gitpod.io',
     'localhost',
-    'mycardrfapi.herokuapp.com'
+    'mycardrfapi-d64556077ed4.herokuapp.com'
 ]
 
 

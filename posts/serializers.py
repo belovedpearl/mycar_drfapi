@@ -16,7 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source = 'owner.profile.id')
     location = serializers.ReadOnlyField(source = 'owner.profile.location')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
-    image = serializers.ImageField(required=True)
+    # image = serializers.ImageField(required=True)
     upvote_id = serializers.SerializerMethodField()
     downvote_id = serializers.SerializerMethodField()
     upvotes_count = serializers.ReadOnlyField()

@@ -17,6 +17,7 @@
  * [Agile Project Management](#agile-project-management)
  * [User Stories](#user-stories)
  * [Features](#features)
+ * [Database Model](#database-model)
  
 * [Technology Used](#technology-used)
     * [Languages](#languages)
@@ -215,4 +216,112 @@ This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herok
 <summary>Sceeenshot of Followers list on the live site</summary>
     <img src="" width="80%">
 </details>
+
+---
+
+# Database Model
+
+---
+
+![Representation of the user structure and the different models used.]()
+
+This section shows a representation of user structure and the database used in the buildup of MyCar project. Six apps were created to expose different endpoints to be used in the frontend.
+
+## Profile Class
+
+The is used as a template to add and update user's profile, with this model users profile details are stored up in the API.
+
+|Field | Details|
+|---   | --------
+|Owner | A one to one field linked to the user. Deleting the user will have a cascade effect on all posts made by the user (on_delete=models.CASCADE) |
+|Location | CharField with maximum length set to 255, blank is set to true to allow empty values to be used.|
+| Name | CharField with maximum length set to 255, blank is set to true to allow empty values to be used.|
+|Job_title| CharField with maximum length set to 255, blank is set to true to allow empty values to be used.|
+|Current_employer| CharField with maximum length set to 255, blank is set to true to allow empty values to be used.|
+|Image| An image field. If users fail to provide an image it is set to the default placeholder.|
+|About| A textfield, blanl property set to true to allow empty values to be used.|
+|Date Created | Sets the date the post is made. It is set to auto_now_add=True so that exact time of creating the post can be recorded.|
+| Date Updated | Sets the date any update is made on the post.|
+
+### Profile Class Methods
+
+* The first been the Meta class which returns the ordering of posts in descending order of creation to allow for latest profile first.
+* A string method returning the profile owner.
+
+### Create Profile Function
+
+Profile creation is set to be handled automatically when a new user successfully registers, it uses the [post_save](https://docs.djangoproject.com/en/5.0/ref/signals/) signal to create a new profile everytime.
+
+## Profile View
+
+### ProfileList View & Serializer
+
+Using the [ListAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listapiview) the list of all profiles can be viewed ordered in the descending order of creation. I have setup a count for posts, following, followers, upvotes, downvotes. A profile serializer class has also been setup to handle profile model instances.
+
+ I have added two filterset fields for;
+
+* Profiles that are following the logged in user
+* Profiles that are being followed by the logged in user
+
+I have also added the following fields to the returned JSON data:
+
+* is_owner
+* following_id
+* posts_count
+* followers_count
+* following_count
+* upvotes_count
+* downvotes_count
+
+### ProfileDetail View & Serializer
+With defined permission, users are able to access profile details. Profile owners are allowed to access the SAFE methods on this view. It uses the setup ProfileSerializer. Using the [RetrieveUpdateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdateapiview), users can get the details of a profile and update it.
+
+---
+
+## Post Class
+
+The is used as a template to add and update a post, with this model post details are stored up in the API.
+
+|Field | Details|
+|---   | --------
+|Owner | A foreign field linked to the user. Deleting the user will have a cascade effect on all posts made by the user (on_delete=models.CASCADE) |
+|Make | CharField with maximum length set to 255|
+| Model | CharField with maximum length set to 255|
+|Year| Positive integer field|
+|Image| An image field. Users are always required to add an image|
+|Description| A textfield, takes the post authors description of his experience with the car.|
+| Body types | CharField with maximum length set to 50, Choices set to car_types (already defined), a default set to hatchbacks
+|Date Created | Sets the date the post is made. It is set to auto_now_add=True so that exact time of creating the post can be recorded.|
+| Date Updated | Sets the date any update is made on the post.|
+
+### Post Class Methods
+
+* The first been the Meta class which returns the ordering of posts in descending order of creation to allow for latest posts first.
+* A string method returning the post id, make and model for easy recognition of the post..
+
+
+## Post View
+
+### PostList View & Serializer
+
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all posts can be viewed ordered in the descending order of creation.The view also allows for post creation. Permission classes is used to allow authenticated users access the different methods. I have setup a count for upvotes, downvotes and reviews associated by each post. A post serializer class has also been setup to handle post model instances.
+
+I have added search field function for easy and quick access to posts required by users;
+
+* ^make - Starts with make
+* ^model - Starts with model
+* owner_username - Search with post author name
+* ^body_types - Starts with body type
+* year - Contains year
+
+I have also added the following filterset fields to the posts:
+
+* Posts whose owners the user is following - to be used in the front end 'Feed' page
+* Posts that have been upvoted by the user - to be used on the profile page
+* Posts that have been downvoted by the user - to be used on the profile page
+* Posts created by the user - to be used on the profile page
+* Body types
+
+### PostDetail View & Serializer
+With defined permission, users are able to access post details functions. Post owners are able to access the SAFE methods on this view. It uses the setup PostSerializer. Using the [RetrieveUpdateDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdatedestroyapiview), users can get the details of a post, update and delete it. For more details to be made available, I have added counts for upvotes, downvotes and reviews on the post detail page.
 

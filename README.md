@@ -2,6 +2,11 @@
 
 [View code here](https://github.com/belovedpearl/mycar_drfapi)
 
+![Presentation](screenshots/live_/presentation)
+
+
+[View live site here](https://mycardrfapi-d64556077ed4.herokuapp.com/)
+
 ---
 
 **Table of Contents:**
@@ -11,6 +16,7 @@
  * [Scope](#scope)  
  * [Agile Project Management](#agile-project-management)
  * [User Stories](#user-stories)
+ * [Features](#features)
  
 * [Technology Used](#technology-used)
     * [Languages](#languages)
@@ -65,14 +71,15 @@ This backend project was managed using agile methodologies by using different us
 
 The Kanban board can be viewed [here](https://github.com/users/belovedpearl/projects/8)
 
+![Kanban Board](screenshots/mama's_kitchen_details_desktop&laptop.webp)(screenshot of kanban board)
 
-(screenshot of kanban board)
+
 
 ---
 
 # User Stories
 
-Users here refers to the developer or the superuser taht have access to the backend site as the project is majorly an API to store data from the frontend.
+Users here refers to the developer or the superuser that have access to the backend site as the project is majorly an API to store data from the frontend.
 Users story also illustrate how frontend users are able to interact with the API.
 
 Developers users stories are summarised with the different endpoints exposed below;
@@ -110,4 +117,102 @@ As a user, I can edit a review that I created so that I can amend any incorrect 
 As a user, I can delete a review I created so that I can remove the review from the API.
 
 ## Upvotes
+
+As a User, I can upvote a vote so that I can express positive remarks about a car post.
+
+As a User, I can see upvotes list on the api so that I can see all upvotes created on the api.
+
+As a User, I can remove my upvote so that I can change my mind about a car post.
+
+As a User, I cannot add an upvote to a post when I already downvoted the same post.
+
+## Downvotes
+
+As a User, I can downvote a post so that I can express nagative impression about a car post.
+
+As a User, I can see downvotes list on the api so that I can see all downvotes created on the api.
+
+As a User, I can remove my downvote so that I can change my mind about a car post.
+
+As a User, I cannot add an downvote to a post when I already upvoted the same post.
+
+## Followers
+
+As a User, I can follow other users so that I can get updated with their posts.
+
+As a User, I can delete my follow so that I can change my mind about following another user.
+
+## Search and Filter
+
+As a User, I can search posts with keywords like (model, make, name) so that I can get posts I am intrested in on time.
+
+As a User, I can filter posts by category (body_types) so that I can view car posts relating to a particular category of interest.
+
+---
+
+# Features
+
+---
+This section discusses the features and the different endpoints on project 'My Car', the choices made.
+
+## Homepage
+
+On first visit to the API site, you are directed to the Root Route homepage. The home page consist of a welcome message to the API. This can be accessed via [live site](https://mycardrfapi-d64556077ed4.herokuapp.com/).
+
+![Homepage Picture](screenshots/live_site/footer.webp)
+
+## Profiles Data
+
+This can be accessed via [profile list](https://mycardrfapi-d64556077ed4.herokuapp.com/profiles/). It contains a list of all registered profiles on the API created on successful user registration. A model is defined to determine the structure of required profile data inheriting from django model.Model class rendered with ProfileList inheriting from django generics.ListAPIView.
+A function is added to automatically create a new profile when a new user is created using the [post_save](https://docs.djangoproject.com/en/5.0/topics/signals/) signals
+
+<details>
+<summary>Sceeenshot of Profile Data page on the live site</summary>
+    <img src="" width="80%">
+</details>
+
+## Posts Data
+
+This can be accessed via [post list](https://mycardrfapi-d64556077ed4.herokuapp.com/posts). This stores up a list of all posts on the API. Users are able to create a new post, update their posts and delete their posts. A model is also defined to determine the post structure using the django model.Model class and rendered using the PostsList view inheriting from [generics.ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview).
+
+<details>
+<summary>Sceeenshot of Posts Data page on the live site</summary>
+    <img src="" width="80%">
+</details>
+
+## Reviews
+
+This can be accessed via [review list](https://mycardrfapi-d64556077ed4.herokuapp.com/reviews/). This contains a list of all reviews that users have provided on the API. Each review is linked to a post. Users can add, edit and delete their reviews as desired.
+
+<details>
+<summary>Sceeenshot of Reviews Data page on the live site</summary>
+    <img src="" width="80%">
+</details>
+
+## Upvotes
+
+This can be accessed via [upvotes list](https://mycardrfapi-d64556077ed4.herokuapp.com/upvotes/). This contains a list of all upvotes that users have provided on the API. Each upvote is linked to a post and each upvote is identified by a unique id. Users can add, view and delete their upvotes as desired. Users cannot add a upvote if they already have a downvote on a post, also users are prevenyed from creating multiple upvotes on a post.
+
+<details>
+<summary>Sceeenshot of Upvotes page on the live site</summary>
+    <img src="" width="80%">
+</details>
+
+## Downvote
+
+This can be accessed via [downvote list](https://mycardrfapi-d64556077ed4.herokuapp.com/downvotes/). This contains a list of all downvotes that users have provided on the API. Each downvote is linked to a post and each downvote is identified by a unique id. Users can add, view and delete their downvotes as desired using the django views [this](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) and [this](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview). Users cannot add a downvote if they already have an upvote on a post, also users are prevented from creating multiple downvote on a post.
+
+<details>
+<summary>Sceeenshot of Downvotes page on the live site</summary>
+    <img src="" width="80%">
+</details>
+
+## Followers
+
+This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herokuapp.com/followers/). This contains a list of all follows that users have created on the API. Authenticated users can view the followers list, create a follow and delete a follow using (this)[https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview] and (this)[https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview] view. Users are prevented from creating multiple follow for a profile. Each created follow is linked to a profile and can be identified by a unique id.
+
+<details>
+<summary>Sceeenshot of Followers list on the live site</summary>
+    <img src="" width="80%">
+</details>
 

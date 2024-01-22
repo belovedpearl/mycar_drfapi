@@ -325,3 +325,37 @@ I have also added the following filterset fields to the posts:
 ### PostDetail View & Serializer
 With defined permission, users are able to access post details functions. Post owners are able to access the SAFE methods on this view. It uses the setup PostSerializer. Using the [RetrieveUpdateDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdatedestroyapiview), users can get the details of a post, update and delete it. For more details to be made available, I have added counts for upvotes, downvotes and reviews on the post detail page.
 
+---
+
+## Upvote Class
+
+The is used as a template to add and remove upvote to a post, with this model user's expression about a post are stored up in the API.
+
+|Field | Details|
+|---   | --------
+|Owner | A foreign field linked to the user. Deleting the user will have a cascade effect on all upvotescreated by the user (on_delete=models.CASCADE) |
+|Post | A foreign key linked to the associated post. It has its related names set to upvotes to allow for easy recognition, deleting a post will remove all associated upvotes in the API (on_delete=models.CASCADE)|
+|Date Created | Sets the date the upvote is made. It is set to auto_now_add=True so that exact time of creating the post can be recorded.|
+
+
+### Upvote Class Methods
+
+* The first been the Meta class which returns the ordering of upvotes in descending order of creation to allow for latest upvote first.
+* On the Meta class, there is the defined unique_together which ensures that each user can only have one upvote to a post.
+* A string method returning the string containing the make and model of the car upvoted
+
+
+## Upvote View
+
+### UpvoteList View & Serializer
+
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all upvotes can be viewed ordered in the descending order of creation.The view also allows for upvote creation. Permission classes is used to allow authenticated users access the different methods.
+
+A perform_create method was setup to ensure that a user can upvote a post only if they haven't already downvoted it. It also adds custom logic to the creation process based on the project requirement.
+
+
+### UpvoteDetail View & Serializer
+With defined permission, users are able to access upvotes details functions. Upvotes owners are able to access the SAFE methods on this view. It uses the setup UpvoteSerializer. Using the [RetrieveDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview), users can get the details of a post and delete it.
+
+
+

@@ -18,6 +18,12 @@
  * [User Stories](#user-stories)
  * [Features](#features)
  * [Database Model](#database-model)
+     * [Database Representation](#database-representation)
+     * [Profile Class](#profile-class)
+     * [Post Class](#post-class)
+     * [Reviews Class](#reviews-class)
+     * [Upvote and Downvote Class](#upvote-and-downvote-class)
+     * [Follower Class](#follower-class)
  
 * [Technology Used](#technology-used)
     * [Languages](#languages)
@@ -223,6 +229,8 @@ This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herok
 
 ---
 
+## Database Representation
+
 ![Representation of the user structure and the different models used.]()
 
 This section shows a representation of user structure and the database used in the buildup of MyCar project. Six apps were created to expose different endpoints to be used in the frontend.
@@ -327,35 +335,96 @@ With defined permission, users are able to access post details functions. Post o
 
 ---
 
-## Upvote Class
+## Review Class
 
-The is used as a template to add and remove upvote to a post, with this model user's expression about a post are stored up in the API.
+The is used as a template to add and update a review, with this model review details added to a post are stored up in the API.
 
 |Field | Details|
 |---   | --------
-|Owner | A foreign field linked to the user. Deleting the user will have a cascade effect on all upvotescreated by the user (on_delete=models.CASCADE) |
-|Post | A foreign key linked to the associated post. It has its related names set to upvotes to allow for easy recognition, deleting a post will remove all associated upvotes in the API (on_delete=models.CASCADE)|
-|Date Created | Sets the date the upvote is made. It is set to auto_now_add=True so that exact time of creating the post can be recorded.|
+|Owner | A foreign field linked to the user. Deleting the user will have a cascade effect on all reviews made by the user (on_delete=models.CASCADE) |
+|Post | A foreign field linked to the Post. Deleting the Post will have a cascade effect on all reviews taht exists on the post. (on_delete=models.CASCADE) |
+|Content| A textfield, takes the desired text of the user to the post.|
+|Date Created | Sets the date the review is made. It is set to auto_now_add=True so that exact time of creating the review can be recorded.|
+| Date Updated | Sets the date any update is made on the review.|
+
+### Review Class Methods
+
+* The first been the Meta class which returns the ordering of reviews in descending order of creation to allow for latest reviews first.
 
 
-### Upvote Class Methods
 
-* The first been the Meta class which returns the ordering of upvotes in descending order of creation to allow for latest upvote first.
-* On the Meta class, there is the defined unique_together which ensures that each user can only have one upvote to a post.
-* A string method returning the string containing the make and model of the car upvoted
+### ReviewList View & Serializer
+
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all reviews can be viewed ordered in the descending order of creation.The view also allows for review creation. Permission classes is used to allow authenticated users access the SAFE methods. I have setup a filter backend to filter reviews by post. A Review serializer class has also been setup to handle review model instances.
+A perform_create method was used to set the owner field as the current user before it os saved to the database.
+
+### ReviewtDetail View & Serializer
+With defined permission, users are able to access review details functions. Review owners are able to access the SAFE methods on this view. It uses the setup ReviewDetailSerializer. Using the [RetrieveUpdateDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdatedestroyapiview), users can get the details of a review, update and delete it.
+
+---
+
+## Upvote and Downvote Class
+
+The is used as a template to add and remove upvote/downvote to a post, with this model user's expression about a post are stored up in the API.
+
+|Field | Details|
+|---   | --------
+|Owner | A foreign field linked to the user. Deleting the user will have a cascade effect on all upvotes/downvotes created by the user (on_delete=models.CASCADE) |
+|Post | A foreign key linked to the associated post. It has its related names set to upvotes/downvotes to allow for easy recognition, deleting a post will remove all associated upvotes/downvotes in the API (on_delete=models.CASCADE)|
+|Date Created | Sets the date the upvote/downvote is made. It is set to auto_now_add=True so that exact time of creating the upvote/downvote can be recorded.|
 
 
-## Upvote View
+### Upvote/Downvote Class Methods
 
-### UpvoteList View & Serializer
-
-Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all upvotes can be viewed ordered in the descending order of creation.The view also allows for upvote creation. Permission classes is used to allow authenticated users access the different methods.
-
-A perform_create method was setup to ensure that a user can upvote a post only if they haven't already downvoted it. It also adds custom logic to the creation process based on the project requirement.
+* The first been the Meta class which returns the ordering of upvotes/downvotes in descending order of creation to allow for latest upvote/downvote first.
+* On the Meta class, there is the defined unique_together which ensures that each user can only have one upvote/downvote to a post.
+* A string method returning the string containing the make and model of the car upvoted/downvoted
 
 
-### UpvoteDetail View & Serializer
-With defined permission, users are able to access upvotes details functions. Upvotes owners are able to access the SAFE methods on this view. It uses the setup UpvoteSerializer. Using the [RetrieveDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview), users can get the details of a post and delete it.
+## Upvote/ Downvote View
+
+### UpvoteList/DownvoteList View & Serializer
+
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all upvotes/downvotes can be viewed ordered in the descending order of creation.The view also allows for upvote/downvote creation. Permission classes is used to allow authenticated users access the different methods.
+
+A perform_create method was setup to ensure that a user can upvote/downvote a post only if they haven't already downvoted/upvoted it. It also adds custom logic to the creation process based on the project requirement.
+
+
+### UpvoteDetail/DownvoteDetail View & Serializer
+With defined permission, users are able to access upvotes/downvotes details functions. Upvotes/Downvotes owners are able to access the SAFE methods on this view. It uses the setup UpvoteSerializer. Using the [RetrieveDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview), authors can get the details of an upvote/downvote and delete it.
+
+---
+
+## Follower Class
+
+The is used as a template to add and remove follow to a profile, with this model user are able to follow another profile and details are stored up in the API.
+
+|Field | Details|
+|---   | --------
+|Owner | A foreign key linked to the user. Deleting the user will have a cascade effect on all follows created by the user (on_delete=models.CASCADE). It has a related name property following. |
+|Followed | A foreign key linked to the associated User. It has its related names set to 'followed' to allow for easy recognition, deleting a User will remove all associated followed created in the API (on_delete=models.CASCADE)|
+|Date Created | Sets the date the follow was made. It is set to auto_now_add=True so that exact time of creating the follow can be recorded.|
+
+
+### Follower Class Methods
+
+* The first been the Meta class which returns the ordering of follow in descending order of creation to allow for latest follow listed first.
+* On the Meta class, there is the defined unique_together which ensures that each user can only create one follow to a user.
+* A string method returning the string containing the owner's username and the followed username.
+
+
+## Follower View
+
+### Follower View & Serializer
+
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all follows created can be viewed.Authenticated user's have access to safe methods on this view and the view also allows for follower's creation.
+
+A perform_create method was setup to ensure setting the owner field of the model to the current user before saving it to the database.
+
+### FollowerDetail View & Serializer
+With defined permission, users are able to access follower details functions.Follower creators are able to access the SAFE methods on this view. It uses the setup FollowerSerializer. Using the [RetrieveDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview), authors can get the details of a follower and delete it.
+
+---
 
 
 

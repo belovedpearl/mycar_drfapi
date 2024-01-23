@@ -24,6 +24,7 @@
      * [Reviews Class](#reviews-class)
      * [Upvote and Downvote Class](#upvote-and-downvote-class)
      * [Follower Class](#follower-class)
+* [Testing](#testing)
  
 * [Technology Used](#technology-used)
     * [Languages](#languages)
@@ -425,6 +426,37 @@ A perform_create method was setup to ensure setting the owner field of the model
 With defined permission, users are able to access follower details functions.Follower creators are able to access the SAFE methods on this view. It uses the setup FollowerSerializer. Using the [RetrieveDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview), authors can get the details of a follower and delete it.
 
 ---
+
+# Testing 
+
+
+---
+
+# Technologies Used
+
+## Languages
+
+
+[Python](https://en.wikipedia.org/wiki/Python_(programming_language))- Used to set up the main functionality of this part of the project.
+
+## Python Packages Used
+
+ Some of the several python packages used to execute the project are illustrated below;
+
+ * psycopg2 - PostgreSQL database adapter used for python programming language.
+ * django-allauth - This is an integrated set of django applications that handles registration, authentication, registration, account management e.t.c
+
+## Framework and Tools
+
+* [Django Rest Framework](https://www.django-rest-framework.org/)- Used to build the API
+* [Github](https://www.github.com/) - Used to host the repository, save commits and to manage the project development to achieve the different user stories.
+* [Gitpod](https://www.gitpod.com) - This was used to write code, correct code, commiting and pushing code up to github.
+* [Heroku](https://www.heroku.com/) - Used for holding the deployed version of the project.
+* [Cloudinary](https://www.cloudinary.com/) - Used to hold images files used.
+* [Lucid Chart](https://lucid.app/documents#/documents?folder_id=recent) - This was used for creating the website ERD, a demonstration of the database structure.
+
+ 
+
 
 
 

@@ -641,7 +641,117 @@ Cloudinary is used to store static files.
      
       * python3 manage.py migrate
 
+## More Settings for Django
 
+* For static files storage and usage with django add the following to the settings.py file.
+
+     * STATIC_URL = '/static/'
+
+* Add in 'localhost' and APP_NAME to the ALLOWED_HOSTS list.
+
+     * ALLOWED_HOSTS = ['mycar.herokuapp.com', 'localhost']
+
+* Create a *Procfile and add the line below;
+    
+     * release: python manage.py makemigrations && python manage.py migrate
+       web: gunicorn PROJECT_NAME.wsgi  
+
+After adding all the above settings,
+
+Save, commit and push to github using the following commands;
+     
+      git add
+      git commit -m 'Commit message'
+      git push
+
+To deploy,
+
+*  Go back to heroku and click on your app instance
+
+* Click the 'Deploy' tab. 
+
+* Select 'Github' for deployment method. 
+
+* Search for the repository name you want to deploy and then click 'connect'.
+
+* Scroll down to select the manual deployment section
+
+* Click 'Deploy Branch'. Watch the deployment build up
+
+* Once completed, click on the 'view site' to see the deployed version.
+
+---
+
+# How to fork
+
+---
+
+By forking a repository, you make a copy of a repository without affecting the original repository. You can fork this repository using the following steps.
+
+* Log in to GitHub and locate the [GitHub repository](https://github.com/belovedpearl/mycar_drfapi).
+* At the top of the Repository above the "Settings" Tab on the menu,
+       * locate the "Fork" Button
+       * Click it.
+* You will have a copy of the original repository in your GitHub account.
+* Doing this will allow you make changes to your copy and keep the original safe.
+
+---
+
+# How to Clone
+
+---
+
+* Log into GitHub and locate the [Github repository](https://github.com/belovedpearl/mycar_drfapi).
+
+* Click the 'Code' dropdown at the right of the 'Open' button.
+
+* Copy the URL for the repository.
+
+* Open Git Bash in your IDE.
+
+* Change the current working directory to your desired location.
+
+* Type git clone in the CLI and then paste the URL you copied.
+
+     * $ git clone https://github.com/
+
+* Press Enter to create your local clone.
+
+NOTE- You will need to install all of the packages listed in the requirements file. Use the following command in the terminal
+
+      pip install -r requirements.txt 
+
+to install required packages.
+
+* Finally create the environment file so that the project identifies variables that it requires. Environment variables are usually hidden due to sensitive information and need not be added to github. Ensure the env file is added to the gitignore file. 
+
+The variables declared in the env.py file needs to be added to the Heroku config vars.
+
+Perform all neccessary migrations 
+
+      python3 manage.py migrate
+
+Run the server.
+
+      python3 manage.py runserver
+
+---
+
+# Credits
+
+* The default profile picture used was from '[Mungfali](https://mungfali.com/explore/Default-Photo)'
+
+* Project inspiration from 'Code Institute DRF project'.
+
+---
+
+# Acknowledgments
+
+My special thank you goes to the following:
+
+My husband Adegoke, for his encouragement and support along the way. I do cherish all of your support during this period.
+
+My kids (my boys), for allowing mummy time out to read and code.
 
 
 

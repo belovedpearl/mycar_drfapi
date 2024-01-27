@@ -455,7 +455,196 @@ With defined permission, users are able to access follower details functions.Fol
 * [Cloudinary](https://www.cloudinary.com/) - Used to hold images files used.
 * [Lucid Chart](https://lucid.app/documents#/documents?folder_id=recent) - This was used for creating the website ERD, a demonstration of the database structure.
 
+## Libraries Used
+
+As listed in the requirements file, the libraries used for this project include the following;
+
+* asgiref - ASGI indeed facilitates communication between asynchronous web applications and servers in Python.
+
+* cloudinary - This enabled seamless integration of applications with Cloudinary, a cloud-based media management solution.
+
+* dj-database-url - This enabled the ability to leverage the DATABASE_URL environment variable, which follows the principles outlined in the Twelve-Factor App methodology.
+
+* dj-rest-auth - This package provides drop-in API endpoints specifically designed to handle authentication securely in Django Rest Framework (DRF) applications. It simplify the procass of authentication like signin, signout, password change e.t.c
+
+* Django - Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+
+* django-allauth - django-allauth is a comprehensive set of Django applications that addresses various aspects of user authentication, registration, account management, and third-party (social) account authentication within Django web applications.
+
+* django-cloudinary-storage - This is a package designed to streamline the integration of Cloudinary, a cloud-based media management solution, with Django projects.
+
+* django-cors-headers - Django application designed to facilitate Cross-Origin Resource Sharing (CORS) in Django projects by adding appropriate CORS headers to HTTP responses.
+
+* django-filter - This is a reusable Django application that provides the ability and capability to add dynamic QuerySet filtering based on URL parameters in Django projects. 
+
+* djangorestframework - This is a web-browsable Web APIs.
+
+* djangorestframework-simplejwt - This allows the implemention of token-based authentication RESTful APIs and web applications.
+
+* gunicorn - This is a Python WSGI HTTP Server for UNIX. The Gunicorn server is broadly compatible with various web frameworks, simply implemented, light on server resource usage, and fairly speedy. This is also known as ‘Green Unicorn’.
+
+* oauthlib - This framework was designed to facilitate the implementation of OAuth 1.0a and OAuth 2.0 protocols in Python-based applications.
+
+* pillow - Python Imaging Library that adds image processing capabilities to Python interpreter.
+
+* psycopg2 - This is the most popular PostgreSQL database adapter for Python programming language.
+
+* PyJWT - A Python library that provides support for encoding, decoding, and validating JSON Web Tokens (JWTs) according to the specifications outlined in RFC 7519.
+
+* python3-openid - A Python library that enables support for OpenID authentication in modern server and consumer applications.
+
+* pytz - This is a Python library that provides timezone definitions and utilities to work with them. It allows Python developers to handle timezone-aware datetime calculations and conversions accurately across different timezones.
+
+* requests-oauthlib - It offers OAuth support for applications built with the Requests HTTP library. It simplifies the process of integrating OAuth authentication into Python applications that use the Requests library for making HTTP requests.
+
+* sqlparse - This is a Python library designed for parsing SQL queries.
+
+---
+
+# Deployment
+
+---
+
+The project was deployed to [heroku](https://heroku.com), to view the live project click [here](https://mycardrfapi-d64556077ed4.herokuapp.com/)
+
+## Creating the Project
+
+1. To start, create a GitHub repository from the [Code Institute](https://github.com/Code-Institute-Org/gitpod-full-template) template and then click 'Use this template'.
+
+2. Add a name for your new repository and then click 'Create Repository'.
+
+3. Once the repository is created, click on the 'Gitpod' button to open it up in a gitpod editor.
+
+4. Install django and the supporting libraries using the following commands.
+    
+     * pip3 install 'django<4' gunicorn
+     * pip3 install 'dj_database_url psycopg2
+     * pip3 install 'dj3-cloudinary-storage
+
+5. Create and update requirements file.
+
+     * pip3 freeze --local > requirements.txt
+    
+6. Create the project using the following command
+
+     * django-admin startproject PROJECT_NAME
+    
+7. Applications can be created using the following command,
+
+     * python3 manage.py startapp APP_NAME
+
+  I have used the following applications in my project; Profiles, Posts, Reviews, Upvotes, Downvotes and Followers.
  
+ 8. Add the applications to project's settings file in the INSTALLED_APPS list. 
+
+ 9. Define models in the applications with your desired field.
+
+ 10. After defining models, run the migration using the commands below;
+
+      * python3 manage.py makemigrations
+      * python3 manage.py migrate
+    To view the live server, run the command below;
+
+      * python3 manage.py runserver
+      
+    Click on the open browser button to view django's template view.
+
+## Heroku App
+
+1. Signin to your [heroku](https://id.heroku.com/login) account/ [create](https://signup.heroku.com/identity) an account.
+
+2. Click on the button 'New' to create a new app.
+
+3. Choose a unique app-name for your app.
+
+4. Choose your region.
+
+5. Click 'Create app'.
+
+6. Follow the steps illustrated below to create a database 
+
+7. In the Heroku app settings section, click on 'Reveal Config Vars'. 
+
+8. Create a config variable called DATABASE_URL and paste in the URL copied from ElephantSQL to connect the database to the app.
+
+## Setting up a Database
+
+To setup an external database using the ElephantSQL, follow the following steps;
+
+1. [Log in](https://customer.elephantsql.com/login) to your account / [Create](https://customer.elephantsql.com/signup) a new account.
+
+2. On your dashboard, click on 'Create New Instance' to create a new database instance.
+
+3. Choose a name for your database instance.
+
+4. Select the data center near you.
+
+5. Click 'Create Instance'.
+
+6. Back in the dashboard, click on your new instance name, copy the Database URL (to be used in heroku)
+
+## Cloudinary Setup
+
+Cloudinary is used to store static files.
+
+1. [Create](https://cloudinary.com/users/register_free) a Cloudinary account/ [Login](https://cloudinary.com/users/login) into an existing account and from the dashboard copy the API Environment Variable.
+
+2. In the env.py file add the Cloudinary url
+
+     * os.environ["CLOUDINARY_URL"] = "cloudinary://************************"
+    
+3. In the Heroku settings add the Cloudinary url in Config Vars. 
+
+4. Add a disable collectstatic variable to get the first deployment successfully to Heroku.
+
+5. In the settings.py file, add the Cloudinary Libraries installed to the INSTALLED_APPS list. 
+
+    Note: It is important to add the apps in the following order;
+
+     *  cloudinary_storage
+     *  django.contrib.staticfiles
+     *  cloudinary
+
+## Environment Variable Setup
+
+1. In GitPod and create an env.py file in the top level directory. Add the following
+
+     * import os
+     * os.environ["DATABASE_URL"] 
+     * os.environ["SECRET_KEY"] 
+
+   The database URL is the value copied from the database setup above and the secret key can be anyword as desired by the developer.
+
+2. In the config var section of the app on heroku, create another variable called SECRET_KEY (copy in the same secret key added into the env.py file). 
+
+3. Add the env.py file into the .gitignore file to keep the off github.
+
+4. To connect the env file and the settings, add the following to the settings file.
+
+      * import os
+
+      * import dj_database_url
+
+      * if os.path.isfile("env.py"):
+
+          import env
+
+5. In the settings file, remove the already exposed secret key.
+
+6. Add SECRET_KEY = os.environ.get('SECRET_KEY') to linkup the file with the env secret key.
+
+7. Also, comment out the DATABASE_URL in the settings file replace with the DATABASE_URL in the env file.
+
+      * DATABASE_URL = os.environ.get('DATABASE_URL')
+
+8. Save all fields and migrate changes.
+     
+      * python3 manage.py migrate
+
+
+
+
+
 
 
 

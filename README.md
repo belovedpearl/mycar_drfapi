@@ -429,6 +429,49 @@ With defined permission, users are able to access follower details functions.Fol
 
 # Testing 
 
+---
+
+## Automatic Testing
+
+I have been able to write 14 tests for this project.
+
+
+![Picture of automatic test results](screenshots/make_up/automatictest.png)
+
+## Manual Testing
+
+The following tests were carried out manually on the projects. Different endpoints were tested to see if they fufil their functions as described.
+
+### Posts
+
+|Test | Expected Action | COMMENT |
+|---   | --------| --- |
+|Adding the /posts to the url should open up the post list. | Post list was visible on adding the posts endpoint | PASS
+|Adding post id to the url opens up the post detail page | Post detail page was visible.| PASS |
+| Filter button visible to users | Filter button should be visible | PASS |
+| Clicking on the Filter button shown| Filter options, search and filter field should be shown to shown to users | PASS |
+| Allow post creation by authenticated users | Add post form should be visible below the post list | PASS |
+|Disallow post creation by nonauthenticated users | Add post form shoild not be visible to unauthenticated users | PASS |
+| Disallow post creation without an image | Users should see an error message regarding the empty image field | PASS |
+| Edit post | Post detail should be editable | PASS |
+|Delete post | Post should be removed from the list if the delete button is clicked | PASS |
+
+
+<details>
+<summary>Sceeenshot of Manual Posts test done</summary>
+    <img src="screenshots/make_up/postlist.png" width="80%">
+    <img src="screenshots/make_up/postdetail.png" width="80%">
+    <img src="screenshots/make_up/addpost.png" width="80%">
+    <img src="screenshots/make_up/filter.png" width="80%">
+    <img src="screenshots/make_up/search.png" width="80%">
+    <img src="screenshots/make_up/fieldfilter.png" width="80%">
+    <img src="screenshots/make_up/errorimage.png" width="80%">
+</details>
+
+
+### Reviews
+
+
 
 ---
 

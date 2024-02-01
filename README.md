@@ -453,7 +453,7 @@ The following tests were carried out manually on the projects. Different endpoin
 | Allow post creation by authenticated users | Add post form should be visible below the post list | PASS |
 |Disallow post creation by nonauthenticated users | Add post form shoild not be visible to unauthenticated users | PASS |
 | Disallow post creation without an image | Users should see an error message regarding the empty image field | PASS |
-| Edit post | Post detail should be editable | PASS |
+| Edit post | Post detail should be editable by post owners | PASS |
 |Delete post | Post should be removed from the list if the delete button is clicked | PASS |
 
 
@@ -472,6 +472,25 @@ The following tests were carried out manually on the projects. Different endpoin
 ### Reviews
 
 
+|Test | Expected Action | COMMENT |
+|---   | --------| --- |
+|Adding the /reviews to the url should open up the review list. | Review list should be visible on adding the reviews endpoint | PASS
+|Adding review id to the url opens up the review detail page | Review detail page should be visible.| PASS |
+| Filter button visible to users | Filter button should be visible | PASS |
+| Clicking on the Filter button shown| Field filter should be shown to shown to users | PASS |
+| Allow review creation by authenticated users | Add review form should be visible below the review list | PASS |
+|Disallow review creation by nonauthenticated users | Add review form should not be visible to unauthenticated users | PASS |
+| Edit review | Review detail should be editable by review owners | PASS |
+|Delete post | Review should be removed from the list if the delete button is clicked | PASS |
+
+<details>
+<summary>Sceeenshot of Manual Review test done</summary>
+    <img src="screenshots/make_up/reviewlist.png" width="80%">
+    <img src="screenshots/make_up/addreview.png" width="80%">
+    <img src="screenshots/make_up/reviewdetail.png" width="80%">
+    <img src="screenshots/make_up/fieldfilter.png" width="80%">
+    <img src="screenshots/make_up/reviewdelete.png" width="80%">
+</details>
 
 ---
 

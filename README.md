@@ -442,6 +442,8 @@ I have been able to write 14 tests for this project.
 
 The following tests were carried out manually on the projects. Different endpoints were tested to see if they fufil their functions as described.
 
+---
+
 ### Posts
 
 |Test | Expected Action | COMMENT |
@@ -468,6 +470,7 @@ The following tests were carried out manually on the projects. Different endpoin
     <img src="screenshots/make_up/errorimage.png" width="80%">
 </details>
 
+---
 
 ### Reviews
 
@@ -490,6 +493,75 @@ The following tests were carried out manually on the projects. Different endpoin
     <img src="screenshots/make_up/reviewdetail.png" width="80%">
     <img src="screenshots/make_up/fieldfilter.png" width="80%">
     <img src="screenshots/make_up/reviewdelete.png" width="80%">
+</details>
+
+---
+
+
+### Upvotes and Downvotes
+
+
+|Test | Expected Action | COMMENT |
+|---   | --------| --- |
+|Adding the /upvotes or /downvotes to the url should open up the upvotes/downvotes list respectively | Upvote/Downvote list should be visible on adding the endpoint | PASS
+|Adding upvote/downvote id to the url opens up the detail page of the vote | Upvote/Downvote detail page should be visible.| PASS |
+| Allow upvote/downvote creation by authenticated users | Add upvote/downvote form should be visible below the list | PASS |
+|Disallow upvote/downvote creation by non-authenticated users | Add upvote/downvote form should not be visible to unauthenticated users | PASS |
+|Delete upvote/downvote | Upvote/Downvote should be removed from the list if the delete button is clicked | PASS |
+
+<details>
+<summary>Sceeenshot of Manual Upvote and Downvote test done</summary>
+    <img src="screenshots/make_up/addupvoteform.png" width="80%">
+    <img src="screenshots/make_up/upvotelist.png" width="80%">
+    <img src="screenshots/make_up/downvotelist.png" width="80%">
+    <img src="screenshots/make_up/downvotedetail.png" width="80%">
+    <img src="screenshots/make_up/upvotedelete.png" width="80%">
+    <img src="screenshots/make_up/upvotedetail.png" width="80%">
+</details>
+
+---
+
+### Profiles
+
+
+|Test | Expected Action | COMMENT |
+|---   | --------| --- |
+|Adding the /profiles to the url should open up the profile list | Profile list should be visible on adding the endpoint | PASS
+|Adding profile id to the url opens up the detail page of the profile | Profile detail page should be visible.| PASS |
+| Clicking the filter button | Orderimg and filter fields options should be visiblet | PASS |
+|Allow profile update | Profile update form should be visible to users below each profile detail owners | PASS |
+|Disallow non-profile owners from updating user's profile | No form should be visible to users on the profile detail page | PASS |
+
+
+<details>
+<summary>Sceeenshots of Manual Profile test done</summary>
+    <img src="screenshots/make_up/profilelist.png" width="80%">
+    <img src="screenshots/make_up/profiledetail.png" width="80%">
+    <img src="screenshots/make_up/profileform.png" width="80%">
+    <img src="screenshots/make_up/filterorder.png" width="80%">
+    <img src="screenshots/make_up/filtersearch.png" width="80%">
+</details>
+
+---
+
+### Followers
+
+
+|Test | Expected Action | COMMENT |
+|---   | --------| --- |
+|Adding the /followers to the url should open up the followers list | Followers list should be visible on adding the endpoint | PASS
+|Creating follower | A follow form should be visible to authenticated users below the follower list | PASS |
+| No follower creation |No form should be visible to non-authenticated users below the follower list | PASS |
+| Clicking the delete button to authenticated users | Follower should be removed from the list | PASS |
+
+
+
+<details>
+<summary>Sceeenshots of Manual Followers test done</summary>
+    <img src="screenshots/make_up/followlist.png" width="80%">
+    <img src="screenshots/make_up/followform.png" width="80%">
+    <img src="screenshots/make_up/followdetail.png" width="80%">
+    <img src="screenshots/make_up/deletefollow.png" width="80%">
 </details>
 
 ---

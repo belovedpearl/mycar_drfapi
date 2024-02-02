@@ -11,7 +11,7 @@ class UpvoteListView(generics.ListCreateAPIView):
     Lists or create Upvotes
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = UpvoteSerializer  
+    serializer_class = UpvoteSerializer
     queryset = Upvote.objects.all()
 
     def perform_create(self, serializer):
@@ -20,7 +20,8 @@ class UpvoteListView(generics.ListCreateAPIView):
         # Check if the user has already downvoted
         if Downvote.objects.filter(owner=user, post=post).exists():
             raise serializers.ValidationError(
-                {'details': 'Cannot upvote because you already downvoted this post'}
+                {'details':
+                    'Cannot upvote because you already downvoted this post'}
             )
         serializer.save(owner=self.request.user)
 

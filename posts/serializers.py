@@ -4,17 +4,19 @@ from upvotes.models import Upvote
 from downvotes.models import Downvote
 from reviews.models import Review
 
+
 class PostSerializer(serializers.ModelSerializer):
     """
     Serializer used for the model Post.
-    Includes fields for the post information such as owner, owner's profile details,
+    Includes fields for the post information such as owner,
+     owner's profile details,
     and a method field to check if the user is the post owner.
     Ensures image is included in the post and of the required dimension
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source = 'owner.profile.id')
-    location = serializers.ReadOnlyField(source = 'owner.profile.location')
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    location = serializers.ReadOnlyField(source='owner.profile.location')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     upvote_id = serializers.SerializerMethodField()
     downvote_id = serializers.SerializerMethodField()
@@ -34,7 +36,7 @@ class PostSerializer(serializers.ModelSerializer):
                 'Image width larger than 4096px!'
             )
         return value
- 
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
@@ -47,7 +49,7 @@ class PostSerializer(serializers.ModelSerializer):
             ).first()
             return upvote.id if upvote else None
         return None
-    
+
     def get_downvote_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -60,9 +62,9 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
-        'id', 'owner', 'is_owner', 'profile_id', 'location',
-         'profile_image', 'make', 'model','year', 'description',
-          'image', 'body_types', 'created_at', 'updated_at',
-           'upvote_id', 'downvote_id', 'upvotes_count',
+            'id', 'owner', 'is_owner', 'profile_id', 'location',
+            'profile_image', 'make', 'model', 'year', 'description',
+            'image', 'body_types', 'created_at', 'updated_at',
+            'upvote_id', 'downvote_id', 'upvotes_count',
             'downvotes_count', 'reviews_count'
         ]

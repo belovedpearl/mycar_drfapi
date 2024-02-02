@@ -12,7 +12,7 @@ class Profile(models.Model):
     """
 
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=255, blank= True)
+    location = models.CharField(max_length=255, blank=True)
     name = models.CharField(max_length=255, blank=True)
     job_title = models.CharField(max_length=255, blank=True)
     current_employer = models.CharField(max_length=255, blank=True)
@@ -29,6 +29,7 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.owner}"
 
+
 def create_profile(sender, instance, created, **kwargs):
     """
     Creates a new profile on new user creation
@@ -36,5 +37,6 @@ def create_profile(sender, instance, created, **kwargs):
     """
     if created and not Profile.objects.filter(owner=instance).exists():
         Profile.objects.create(owner=instance)
-        
+
+
 post_save.connect(create_profile, sender=User)

@@ -9,7 +9,7 @@ class FollowersListView(generics.ListCreateAPIView):
     List follower or create a follower if logged in.
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = FollowerSerializer  
+    serializer_class = FollowerSerializer
     queryset = Follower.objects.all()
 
     def perform_create(self, serializer):

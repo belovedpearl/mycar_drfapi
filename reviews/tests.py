@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from posts.models import Post
 from .models import Review
 
+
 class ReviewModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(

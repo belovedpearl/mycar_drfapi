@@ -9,7 +9,7 @@ class DownvoteSerializer(serializers.ModelSerializer):
     Owner field is ReadOnly to prevent change
     Allows one vote on a post via the integrity constraint
     """
-    
+
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
@@ -17,7 +17,6 @@ class DownvoteSerializer(serializers.ModelSerializer):
         fields = ['id', 'created_at', 'owner', 'post']
 
     def create(self, validated_data):
-       
         try:
             return super().create(validated_data)
         except IntegrityError:

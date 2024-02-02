@@ -12,13 +12,13 @@ class PostsList(generics.ListCreateAPIView):
     Gets all Post objects in a list
     Associates owner with the post
     """
-   
+
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
-        upvotes_count= Count('upvotes', distinct=True),
-        downvotes_count= Count('downvotes', distinct=True),
-        reviews_count= Count('review', distinct=True)
+        upvotes_count=Count('upvotes', distinct=True),
+        downvotes_count=Count('downvotes', distinct=True),
+        reviews_count=Count('review', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -33,15 +33,15 @@ class PostsList(generics.ListCreateAPIView):
         'year'
     ]
     filterset_fields = [
-        #user's feed
+        # user's feed
         'owner__followed__owner__profile',
-        #user's upvoted post
+        # user's upvoted post
         'upvotes__owner__profile',
-        #user's downvoted post
+        # user's downvoted post
         'downvotes__owner__profile',
-        #posts
+        # posts
         'owner__profile',
-        'body_types'     
+        'body_types'
     ]
     ordering_fields = [
         'upvotes_count',
@@ -49,7 +49,7 @@ class PostsList(generics.ListCreateAPIView):
         'upvotes__created_at',
         'downvotes__created_at',
     ]
-    
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -61,7 +61,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
-        upvotes_count= Count('upvotes', distinct=True),
-        downvotes_count= Count('downvotes', distinct=True),
-        reviews_count= Count('review', distinct=True)
+        upvotes_count=Count('upvotes', distinct=True),
+        downvotes_count=Count('downvotes', distinct=True),
+        reviews_count=Count('review', distinct=True)
     ).order_by('-created_at')

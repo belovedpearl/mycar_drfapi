@@ -566,6 +566,16 @@ The following tests were carried out manually on the projects. Different endpoin
 
 ---
 
+## Validator Testing
+
+### PEP8
+
+I have validated the code (serializers, views, admin, url and all automatic test files) with [CI Pep8](https://pep8ci.herokuapp.com/), details of the validation can be found [here](screenshots/pep8validation).
+
+Recommendations of whitespace error and comments too long were given and was corrected to get the above results.
+
+---
+
 # Technologies Used
 
 ## Languages

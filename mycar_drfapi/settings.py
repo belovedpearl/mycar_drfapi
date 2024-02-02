@@ -61,11 +61,9 @@ REST_AUTH_SERIALIZERS = {
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure--5sxc@dpc%nq+opkfc$n&r$_ltsh2)s!b#-w(!$)(7n92ahfa1'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
@@ -97,7 +95,6 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
 
-
     'profiles',
     'posts',
     'reviews',
@@ -117,14 +114,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-# if 'CLIENT_ORIGIN' in os.environ:
-#      CORS_ALLOWED_ORIGINS = [
-#          os.environ.get('CLIENT_ORIGIN')
-#      ]
-# else:
-#      CORS_ALLOWED_ORIGIN_REGEXES = [
-#          r"^https://.*\.gitpod\.io$",
-#      ]
+
 if "CLIENT_ORIGIN" in os.environ:
     CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
@@ -164,13 +154,6 @@ WSGI_APPLICATION = 'mycar_drfapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 if 'DEV' in os.environ:
      DATABASES = {

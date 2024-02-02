@@ -7,18 +7,17 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProfileList(generics.ListAPIView):
-    
     """
     List all profiles
     No create view as profile creation is handled by signals
     Orders profile list by creation in descending order
     """
     queryset = Profile.objects.annotate(
-        posts_count = Count('owner__post', distinct=True),
-        followers_count = Count('owner__followed', distinct=True),
-        following_count = Count('owner__following', distinct=True),
-        upvotes_count = Count('owner__upvote', distinct=True),
-        downvotes_count = Count('owner__downvote', distinct=True),
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True),
+        upvotes_count=Count('owner__upvote', distinct=True),
+        downvotes_count=Count('owner__downvote', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     filter_backends = [
@@ -37,8 +36,9 @@ class ProfileList(generics.ListAPIView):
 
     filterset_fields = [
         "owner__following__followed__profile",
-        "owner__followed__owner__profile",     
+        "owner__followed__owner__profile",
     ]
+
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
@@ -48,9 +48,9 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
-        posts_count = Count('owner__post', distinct=True),
-        followers_count = Count('owner__followed', distinct=True),
-        following_count = Count('owner__following', distinct=True),
-        upvotes_count = Count('owner__upvote', distinct=True),
-        downvotes_count = Count('owner__downvote', distinct=True),
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True),
+        upvotes_count=Count('owner__upvote', distinct=True),
+        downvotes_count=Count('owner__downvote', distinct=True),
     ).order_by('-created_at')

@@ -3,10 +3,13 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from .models import Follower
 
+
 class FollowerTests(APITestCase):
     def setUp(self):
-        self.user1 = User.objects.create_user(username='ola', password='adeola1')
-        self.user2 = User.objects.create_user(username='ifeOlu', password='olumide2')
+        self.user1 = User.objects.create_user(
+             username='ola', password='adeola1')
+        self.user2 = User.objects.create_user(
+            username='ifeOlu', password='olumide2')
         self.url = '/followers/'
 
     def test_user_can_follow_another_user(self):
@@ -19,11 +22,12 @@ class FollowerTests(APITestCase):
         self.assertEqual(Follower.objects.first().followed, self.user2)
 
     def test_user_can_unfollow_another_user(self):
-        follower = Follower.objects.create(owner=self.user1, followed=self.user2)
+        follower = Follower.objects.create(
+             owner=self.user1, followed=self.user2)
         self.client.login(username='ola', password='adeola1')
-        
+
         response = self.client.delete(f'/followers/1/')
-        
+
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Follower.objects.count(), 0)
 
@@ -31,7 +35,8 @@ class FollowerTests(APITestCase):
         self.client.login(username='ola', password='adeola1')
 
         non_existing_follower_id = 123
-        response = self.client.delete(f'/followers/{non_existing_follower_id}/')
+        response = self.client.delete(
+             f'/followers/{non_existing_follower_id}/')
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEqual(Follower.objects.count(), 0)

@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from .models import Profile
 
+
 class ProfileModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -17,5 +18,3 @@ class ProfileModelTest(TestCase):
         )
         # Check that a profile was created for the new user
         self.assertTrue(Profile.objects.filter(owner=new_user).exists())
-
-    

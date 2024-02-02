@@ -13,7 +13,8 @@ class Follower(models.Model):
     'unique_together' ensures a user can't follow' the same user more than once
     """
 
-    owner = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        User, related_name="following", on_delete=models.CASCADE)
     followed = models.ForeignKey(
         User, related_name="followed", on_delete=models.CASCADE
     )

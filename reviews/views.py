@@ -5,7 +5,6 @@ from mycar_drfapi.permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-
 class ReviewList(generics.ListCreateAPIView):
     """
     List reviews or create a review if logged in.
@@ -17,7 +16,7 @@ class ReviewList(generics.ListCreateAPIView):
         DjangoFilterBackend
     ]
     filterset_fields = [
-        'post',  
+        'post',
     ]
 
     def perform_create(self, serializer):

@@ -2,7 +2,7 @@
 
 [View code here](https://github.com/belovedpearl/mycar_drfapi)
 
-![Presentation](screenshots/live_/presentation)
+![Presentation](screenshots/live_site/homepage.png)
 
 
 [View live site here](https://mycardrfapi-d64556077ed4.herokuapp.com/)
@@ -25,6 +25,16 @@
      * [Upvote and Downvote Class](#upvote-and-downvote-class)
      * [Follower Class](#follower-class)
 * [Testing](#testing)
+     * [Automatic testing](#automatic-testing)
+     * [Manual testing](#manual-testing)
+     * [Validator testing](#validator-testing)
+* [Technologies Used](#technologies-used)
+* [Libraries Used](#libraries-used)
+* [Deployment](#deployment)
+* [How to Fork](#how-to-fork)
+* [How to Clone](#how-to-clone)
+* [Credits](#credits)
+* [Acknowledgements](#acknowledgements)
  
 * [Technology Used](#technology-used)
     * [Languages](#languages)
@@ -79,7 +89,7 @@ This backend project was managed using agile methodologies by using different us
 
 The Kanban board can be viewed [here](https://github.com/users/belovedpearl/projects/8)
 
-![Kanban Board](screenshots/mama's_kitchen_details_desktop&laptop.webp)(screenshot of kanban board)
+![Kanban Board](screenshots/make_up/projectboard.png)(screenshot of kanban board)
 
 
 
@@ -167,7 +177,7 @@ This section discusses the features and the different endpoints on project 'My C
 
 On first visit to the API site, you are directed to the Root Route homepage. The home page consist of a welcome message to the API. This can be accessed via [live site](https://mycardrfapi-d64556077ed4.herokuapp.com/).
 
-![Homepage Picture](screenshots/live_site/footer.webp)
+![Homepage Picture](screenshots/live_site/homepage.png)
 
 ## Profiles Data
 
@@ -176,7 +186,7 @@ A function is added to automatically create a new profile when a new user is cre
 
 <details>
 <summary>Sceeenshot of Profile Data page on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/profilepage.png" width="80%">
 </details>
 
 ## Posts Data
@@ -185,7 +195,7 @@ This can be accessed via [post list](https://mycardrfapi-d64556077ed4.herokuapp.
 
 <details>
 <summary>Sceeenshot of Posts Data page on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/postpage.png" width="80%">
 </details>
 
 ## Reviews
@@ -194,7 +204,7 @@ This can be accessed via [review list](https://mycardrfapi-d64556077ed4.herokuap
 
 <details>
 <summary>Sceeenshot of Reviews Data page on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/reviewpage.png" width="80%">
 </details>
 
 ## Upvotes
@@ -203,7 +213,7 @@ This can be accessed via [upvotes list](https://mycardrfapi-d64556077ed4.herokua
 
 <details>
 <summary>Sceeenshot of Upvotes page on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/upvotepage.png" width="80%">
 </details>
 
 ## Downvote
@@ -212,16 +222,16 @@ This can be accessed via [downvote list](https://mycardrfapi-d64556077ed4.heroku
 
 <details>
 <summary>Sceeenshot of Downvotes page on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/downvotepage.png" width="80%">
 </details>
 
 ## Followers
 
-This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herokuapp.com/followers/). This contains a list of all follows that users have created on the API. Authenticated users can view the followers list, create a follow and delete a follow using (this)[https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview] and (this)[https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview] view. Users are prevented from creating multiple follow for a profile. Each created follow is linked to a profile and can be identified by a unique id.
+This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herokuapp.com/followers/). This contains a list of all follows that users have created on the API. Authenticated users can view the followers list, create a follow and delete a follow using [this](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) and [this](https://www.django-rest-framework.org/api-guide/generic-views/#retrievedestroyapiview) view. Users are prevented from creating multiple follow for a profile. Each created follow is linked to a profile and can be identified by a unique id.
 
 <details>
 <summary>Sceeenshot of Followers list on the live site</summary>
-    <img src="" width="80%">
+    <img src="screenshots/live_site/followerpage.png" width="80%">
 </details>
 
 ---
@@ -315,7 +325,7 @@ The is used as a template to add and update a post, with this model post details
 
 Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all posts can be viewed ordered in the descending order of creation.The view also allows for post creation. Permission classes is used to allow authenticated users access the different methods. I have setup a count for upvotes, downvotes and reviews associated by each post. A post serializer class has also been setup to handle post model instances.
 
-I have added search field function for easy and quick access to posts required by users;
+I have added search field function for easy and quick access to posts required by users using [this](https://www.django-rest-framework.org/api-guide/filtering/) material;
 
 * ^make - Starts with make
 * ^model - Starts with model
@@ -329,7 +339,7 @@ I have also added the following filterset fields to the posts:
 * Posts that have been upvoted by the user - to be used on the profile page
 * Posts that have been downvoted by the user - to be used on the profile page
 * Posts created by the user - to be used on the profile page
-* Body types
+* Body types - not eventually used but can be used to make a filter accoding to bodytypes
 
 ### PostDetail View & Serializer
 With defined permission, users are able to access post details functions. Post owners are able to access the SAFE methods on this view. It uses the setup PostSerializer. Using the [RetrieveUpdateDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdatedestroyapiview), users can get the details of a post, update and delete it. For more details to be made available, I have added counts for upvotes, downvotes and reviews on the post detail page.
@@ -359,7 +369,7 @@ The is used as a template to add and update a review, with this model review det
 Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all reviews can be viewed ordered in the descending order of creation.The view also allows for review creation. Permission classes is used to allow authenticated users access the SAFE methods. I have setup a filter backend to filter reviews by post. A Review serializer class has also been setup to handle review model instances.
 A perform_create method was used to set the owner field as the current user before it os saved to the database.
 
-### ReviewtDetail View & Serializer
+### Review Detail View & Serializer
 With defined permission, users are able to access review details functions. Review owners are able to access the SAFE methods on this view. It uses the setup ReviewDetailSerializer. Using the [RetrieveUpdateDestroyAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#retrieveupdatedestroyapiview), users can get the details of a review, update and delete it.
 
 ---
@@ -418,7 +428,7 @@ The is used as a template to add and remove follow to a profile, with this model
 
 ### Follower View & Serializer
 
-Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all follows created can be viewed.Authenticated user's have access to safe methods on this view and the view also allows for follower's creation.
+Using the [ListCreateAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#listcreateapiview) the list of all follows created can be viewed. Authenticated user's have access to safe methods on this view and the view also allows for follower's creation.
 
 A perform_create method was setup to ensure setting the owner field of the model to the current user before saving it to the database.
 
@@ -433,7 +443,7 @@ With defined permission, users are able to access follower details functions.Fol
 
 ## Automatic Testing
 
-I have been able to write 14 tests for this project.
+I have been able to write 19 tests for this project.
 
 
 ![Picture of automatic test results](screenshots/make_up/automatictest.png)
@@ -889,7 +899,7 @@ Run the server.
 
 ---
 
-# Acknowledgments
+# Acknowledgements
 
 My special thank you goes to the following:
 

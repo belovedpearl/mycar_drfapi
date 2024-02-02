@@ -21,7 +21,7 @@
      * [Database Representation](#database-representation)
      * [Profile Class](#profile-class)
      * [Post Class](#post-class)
-     * [Reviews Class](#reviews-class)
+     * [Reviews Class](#review-class)
      * [Upvote and Downvote Class](#upvote-and-downvote-class)
      * [Follower Class](#follower-class)
 * [Testing](#testing)
@@ -30,23 +30,12 @@
      * [Validator testing](#validator-testing)
 * [Technologies Used](#technologies-used)
 * [Libraries Used](#libraries-used)
-* [Deployment](#deployment)
+* [Development and Deployment](#development-and-deployment)
 * [How to Fork](#how-to-fork)
 * [How to Clone](#how-to-clone)
 * [Credits](#credits)
 * [Acknowledgements](#acknowledgements)
  
-* [Technology Used](#technology-used)
-    * [Languages](#languages)
-    * [Python Modules and Packages Used](#python-modules-packages-used)
-* [Framework and Tools](#frameworks-and-tools)
-* [Development and Deployment](#development-and-deployment)
-* [How to Fork](#how-to-fork)
-* [How to Clone](#how-to-clone)
-* [Testing](#testing)
-* [Tools](#tools)
-* [Credits](#credits)
-* [Acknowledgement](#acknowledgement)
 
 ---
 # Scope
@@ -242,7 +231,7 @@ This can be accessed via [followers list](https://mycardrfapi-d64556077ed4.herok
 
 ## Database Representation
 
-![Representation of the user structure and the different models used.]()
+![Representation of the user structure and the different models used.](screenshots/live_site/databaserep.png)
 
 This section shows a representation of user structure and the database used in the buildup of MyCar project. Six apps were created to expose different endpoints to be used in the frontend.
 
@@ -655,7 +644,7 @@ As listed in the requirements file, the libraries used for this project include 
 
 ---
 
-# Deployment
+# Development and Deployment
 
 ---
 
